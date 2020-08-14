@@ -1,0 +1,21 @@
+extends layout
+block content
+    br
+    head
+        link(rel='stylesheet' href='./stylesheets/searchStyle.css')
+
+    .container.pb-5.w-100.mt-5.border.shadow.bg-light
+
+        .row
+            .col-sm.text-center.m-3.pt-3
+                h1.text-primary.font-italic Find Places To Rent or Buy Near<br> <b>San Francisco State University
+        .row
+            .col-sm.text-center.m-3.pb-3
+                form(action='/search' method='POST')#searchBar.form-inline.mr-auto.justify-content-center.align-items-center
+                    input#searchBox.form-control.mr-sm-2.h-50.px-3(name='searchItem' type='text' placeholder='Search By Address, City, or Zipcode' aria-label='Search')
+                    include searchbutton
+    .container-fluid.border.shadow
+        .row.px-3.pt-3
+            include listingDisplay.pug
+
+        

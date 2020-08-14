@@ -1,0 +1,104 @@
+hr {
+    background-color: #fff;
+      border-top: 2px dotted #8c8b8b;
+  }
+  
+  .footer{
+    background-color: #D1C4E9;
+    margin:0px auto;
+    padding: 20px 0px 20px 0px;
+    vertical-align:bottom;
+  }
+
+  .image1 {
+    max-height: 600px;
+    max-width: 1100px;
+  }
+  
+  .image3 {
+    max-height: 250px;
+    max-width: 250px;
+  }
+
+  .team-name-text {
+    font-size: xx-large;
+  }
+  
+  #navbar-color {
+    color: white;
+    font-weight: bold;
+    background-color: teal;
+  }
+
+  .txt-alignment {
+    text-align: center;
+    font-size: 150%;
+  }
+
+  .text-size {
+    font-size: 150%;
+  }
+
+  .page-header {
+    padding-bottom: 9px;
+    margin: 40px 0 20px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .avatar-icon {
+    width: 130px;
+    height: 130px;
+    position: relative;
+  }
+
+  .content-block {
+    overflow: hidden;
+    border: 1px solid #dfdfdf;
+    border-radius: 8px;
+    background-color: #fff;
+  }
+
+  .content-title {
+    position: relative;
+    margin: 0 0 2px;
+    padding: 22px 30px;
+    background-color: #fafafa;
+    font-size: 16px;
+    line-height: 1;
+  }
+
+  .setting-list {
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+  }
+
+  .setting-details {
+    position: relative;
+    margin: 0 29px;
+    padding: 13px 0;
+    overflow: hidden;
+    border-top: 1px solid #f2f2f2;
+    font-size: 150%;
+  }
+
+  .setting-label {
+    float: left;
+    width: 25%;
+    margin-top: 2px;
+    padding-left: .5em;
+    color: #757575;
+    font-size: 24px;
+  }
+
+  .setting-text {
+    padding-left: 25%;
+  }
+
+  body{
+    margin-top:20px;
+  }

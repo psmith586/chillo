@@ -1,0 +1,23 @@
+f.btn-group
+    button#searchButton.bg-light.btn.text-primary.btn-outline-primary.btn-rounded.btn-md.my-0(type='submit' onclick='saveValue') Search
+    button.btn.bg-light.btn.text-primary.btn-outline-primary.dropdown-toggle.dropdown-toggle-split(type='button' data-toggle='dropdown')
+    #dropDownMenu.dropdown-menu.dropdown-menu-right
+        .d-flex.flex-column.bd-highlight.mb-3.align-items-start.px-1
+            h6.dropdown-header Filter By
+            .form-check
+                input#rentCheckBox.mx-1(type='checkbox' name='housingType' value='0')
+                label.mx-1(for='rentCheckBox') For Rent
+            .form-check
+                input#saleCheckBox.mx-1(type='checkbox' name='housingType' value='1')
+                label.mx-1(for='saleCheckBox') For Sale
+            .dropdown-divider
+            h6.dropdown-header Sort By
+            .form-check
+                input#recentRadioBox.mx-1(type='radio' name='navSortBy' value='most_recent' checked)
+                label.mx-1(for='recentRadioBox') Most Recent
+            .form-check
+                input#priceRadioBox.mx-1(type='radio' name='navSortBy' value='price_high')
+                label.mx-1(for='priceRadioBox') Price High-Low
+            .form-check
+                input#distanceRadioBox.mx-1(type='radio' name='navSortBy' value='price_low')
+                label.mx-1(for='distanceRadioBox') Price Low-High

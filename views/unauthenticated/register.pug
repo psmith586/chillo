@@ -1,0 +1,58 @@
+extends ../layout
+block content
+    link(rel='stylesheet' href='../stylesheets/loginStyle.css')
+    //script(type='text/javascript' src='./javascripts/validateForm.js')
+    .container.pb-5.bg-light.w-50.mt-5.opac
+        .row.justify-content-end
+            .col-10.align-content-center
+                form.needs-validation(action='/api/register' method='POST' novalidate='')
+                    .form-group
+                        h1.text-dark.font-italic First Name:
+                        input#firstName.form-control(type='text' placeholder='Frank' name='first_name' required='')
+                        .valid-feedback Valid.
+                        .invalid-feedback Please fill out this field.
+                    .form-group
+                        h1.text-dark.font-italic Last Name:
+                        input#lastName.form-control(type='text' placeholder='Castle' name='last_name' required='')
+                        .valid-feedback Valid.
+                        .invalid-feedback Please fill out this field.
+                    .form-group
+                        h1.text-dark.font-italic Email:
+                        input#email.form-control(type='email' placeholder='frankcastle@sfsu.edu' name='email' required='')
+                        .valid-feedback Valid.
+                        .invalid-feedback Please fill out this field.
+                    .form-group
+                        h1.text-dark.font-italic Password:
+                        input#pwd.form-control(type='password' placeholder='Enter password' name='password' required='')
+                        .valid-feedback Valid.
+                        .invalid-feedback Please fill out this field.
+                    //-.form-group
+                        h1.text-dark.font-italic Confirm Password:
+                        input#pwdConf.form-control(type='password' placeholder='Enter password again' name='pwd' required='')
+                        .valid-feedback Valid.
+                        .invalid-feedback Please fill out this field.
+                    //
+                    button.btn.btn-primary(type='submit') Register
+                form(action='/user/login' method='GET')
+                    .form-group.form-check
+                    button.btn.btn-primary(onclick='/user/register') Have an Account? Login Here
+    script.
+        (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    style.
+        .opac{opacity:.95 !important; border-radius:6px;min-width:800px}

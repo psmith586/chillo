@@ -1,0 +1,1 @@
+My name is Daniel Belmeur and I am a Senior at San Francisco State University. I am knowledgeable in Java, Javascript, HTML5, C, and C++. I have worked with technologies such as Node.js, p5.js, and bootstrap 4. I work for Delta Airlines and fly standby when not grounded by pandemics. I also enjoy most sports including Basketball, Hockey, UFC, and baseball. 

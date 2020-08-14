@@ -1,0 +1,235 @@
+#textBox{
+    padding-left: 345px;
+    font-size: xx-large;
+}
+
+.my-listings {
+	min-width: 400px !important;
+}
+
+@media (max-width: 850px) {
+	.my-map {
+		display: none;
+	}
+}
+
+#map {
+	height: 75vh;
+	width: 100%;
+}
+.cardImg {
+	height: 200px;
+	width: 100%;
+	margin: auto;
+}
+.listingDiv {
+	max-height: 75vh;
+}
+
+/* DELETE */
+body {
+	background-image: none !important;
+}
+/* DELETE */
+
+.border-3 {
+	border-width:3px !important; 
+	border-style:none none none none !important;
+}
+.card {
+	opacity: .75;
+}
+.card:hover{
+	border-width: 5px !important; 
+	opacity:1;
+}
+.card:active{
+	border-color:#0275d8 !important;
+}
+.dropdown-menu {
+	min-height: 50px !important;
+	border: 1px solid lightgrey;
+	max-height: 75vh;
+}
+
+p, a {
+	margin: 0;
+	padding: 0;
+}
+
+.rowindex {
+	z-index: 1;
+}
+
+input[type=range] {
+	width: 200px !important;
+	background-color: none !important;
+}
+input[type=text] {
+	height: 35px;
+	font-size: 12px !important;
+}
+
+.range-field:hover {
+	background-color: none !important;
+}
+
+.filterButton {
+	width: 35px !important;
+	height: 35px !important;
+	font-size: 15px !important;
+	padding: 5px !important;
+}
+
+.filterButton, .filterButton:active, .dropdown-item, .form-check {
+	border-radius: 4px !important;
+	background-color: none !important;
+}
+
+.filterButton:hover, .filterButton:focus, .dropdown-item:focus{
+	box-shadow: .5px .5px 5px rgba(0, 0, 0, 0.4) !important;
+	background-color: #0275d8;
+	color: white !important;
+	outline: none !important;
+
+}
+
+.labelColor {
+	background-color: #0275d8 !important;
+	color: white;
+}
+
+
+.priceSelected {
+	outline: none !important;
+	width: 100px;
+	text-overflow: hidden;
+}
+
+.rangeStyle, .rangeStyle:hover {
+	background-color: white !important;
+	padding: 5px;
+}
+
+.form-check, .form-check:hover {
+	outline: none !important;
+	background-color: none !important;
+}
+
+.filterPrices {
+	width: 100%;
+	text-align: left;
+	padding: 5px !important;
+	font-size: 12px !important;
+}
+.filterPrices:hover {
+	background-color: #0275d8;
+	color: white;
+}
+
+.filterPrices:active {
+	outline: none !important;
+
+}
+
+.filterPrices:focus {
+	outline: none !important;
+	background-color: #0275d8;
+	color: white;
+}
+
+.moreDropDown{
+	width: 425px !important;
+	
+}
+
+.h6 {
+	font-size: 14px !important;
+}
+
+.h5 {
+	font-size: 16px !important;
+}
+
+.disabled {
+	background-color: white !important;
+	color: white !important;
+}
+
+.stories {
+	width: 60px !important;
+}
+
+.amenities {
+	width: 100% !important;
+}
+
+.card:hover {
+	cursor: pointer;
+}
+
+.backgroundOverlay {
+	position: fixed;
+	display: none;
+	height: 100vh;
+	width: 100vw;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 2;
+	background-color: rgba(0,0,0,0.35);
+}
+
+.listingOverlay {
+	position: fixed;
+	display: none;
+	height: 100vh;
+	width: 75vw;
+	min-width: 400px;
+	top: 0;
+	bottom: 0;
+	left: 50%;
+	padding-top: 100px;
+	transform: translate(-50%,0);
+	z-index: 3;
+	background-color: white;
+	color: black;
+}
+
+.listingOverlay_ExitButton {
+	width: 40px;
+	height: 40px;
+	font-weight: bold;
+}
+
+#filterSearchBox {
+	width: 400px !important;
+}
+
+.backgroundOverlayContact {
+	position: fixed;
+	display: none;
+	height: 100vh;
+	width: 100vw;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 4;
+	background-color: rgba(0,0,0,0.35);
+}
+
+.contactOverlay {
+	position: fixed;
+	display: none;
+	height: 600px;
+	width: 400px;
+	min-width: 400px;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 5;
+	background-color: white;
+	color: black;
+}

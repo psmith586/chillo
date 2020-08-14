@@ -1,0 +1,26 @@
+.backgroundOverlayContact(id="backgroundOverlayContact" onclick="contactListing("+val['listing_id']+")")
+.contactOverlay.shadow-lg.border-secondary.rounded.p-3(id="contactOverlay")
+    form.form-inline(action='/api/message' method='POST' name='contactform' id='contactform' )
+        input(type='hidden' name='listing_id' value='' id='listing_id')
+        .container-fluid
+            .row.justify-content-md-start.mt-3.mx-3
+                .col-md-auto.p-0.w-100
+                    h4.text-left="Contact Listing"
+            .row.pb-3.align-items-start.mx-3
+                .col.p-0
+                    label#contactLabel_id.text-primary.h5.my-0(style='display: inline-block; text-align: left;')
+            .row.justify-content-md-center.align-items-center.px-3
+                .col-md-auto.w-100
+                    p.text-secondary(style='text-align: justify')="Send a message to the owner of this Listing, and we'll create a new Message Board where you can communicate directly. Find any new and previous messages in your Account section."
+            .row.justify-content-md-start.px-3.mt-3
+                .col-md-auto.w-100
+                    label.h5(for='message_area' style='display: inline-block; text-align: left;')="Message"
+            .row.justify-content-md-start.px-3.mt-1.pb-3
+                .col-md-auto.w-100
+                    textarea.form-control.w-100.text-secondary.bg-light(id='message_area' name='msg_txt' rows='5' style='font-size: 12px; resize:none;' placeholder='Start a conversation with the Listing Owner.')
+            .row.justify-content-md-start.px-3.mt-3
+                .col-md-auto.w-100        
+                    input.btn.btn-outline-primary.w-100(type='submit' value='Send Message Request' style='font-size: 20px;')
+            .row.justify-content-md-center.align-items-center.px-3.mt-1
+                .col-md-auto.w-100
+                    p.text-secondary(style='text-align: justify; font-size: 10px;')="By submitting this Message Request you agree to Chillow's Terms of Use & Privacy Policy. Chillow is not responsible for any personal inquiries between the Landlord and Renter. Chillow is only responsible for protecting the identify and information between the two parties. Message/data rates may apply."

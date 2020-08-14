@@ -1,0 +1,20 @@
+body {
+	overflow: auto !important;
+    background-color: black !important;
+}
+
+#searchBox{
+    width: 600px;
+    min-width: 300px;
+    height: 100px;
+    font: 26px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+#searchButton{
+    background-color: azure;
+}
+
+#map {
+    height: 80vh;  
+    width: 100%; 
+}

@@ -1,0 +1,61 @@
+link(rel='stylesheet' href='./stylesheets/chatStyle.css')
+.col.bg-white
+    .row
+        h3 User Messages
+        //-for each user the user has messaged
+           .col
+                username
+    .row
+        .container.chatDiv.overflow-auto
+            //each val in query
+                //container with chat message goes here
+
+            //-
+                need a row of tabs clickable that will determine which user chat to display
+                this row will be populated with the names of other users the current user has had contact with
+                    if userMessagesColumn.length > 0
+                        populate the row
+                    else
+                        display no user messages
+                        create message button
+
+                if messagequery.length > 0
+                do the stuff below
+            //
+            .container
+                img(src='../resources/images/eddy.jpg' alt='Tester')
+                p Hello. How are you today?
+                span.time-right 11:00
+            .container.darker
+                img(src='../resources/images/eddy.jpg' alt='Tester')
+                p Hey! I&apos;m fine. Thanks for asking!
+                span.time-left 11:01
+            .container
+                img(src='../resources/images/eddy.jpg' alt='Tester')
+                p Sweet! So, what do you wanna do today?
+                span.time-right 11:02
+            .container.darker
+                img(src='../resources/images/eddy.jpg' alt='Tester')
+                p Nah, I dunno. Play soccer.. or learn more coding perhaps?
+                span.time-left 11:05
+            .container
+                img(src='../resources/images/eddy.jpg' alt='Tester')
+                p Hello. How are you today?
+                span.time-right 11:00
+            .container.darker
+                img(src='../resources/images/eddy.jpg' alt='Tester')
+                p Hey! I&apos;m fine. Thanks for asking!
+                span.time-left 11:01
+            .container
+                img(src='../resources/images/eddy.jpg' alt='Tester')
+                p Sweet! So, what do you wanna do today?
+                span.time-right 11:02
+            .container.darker
+                img(src='../resources/images/eddy.jpg' alt='Tester')
+                p Nah, I dunno. Play soccer.. or learn more coding perhaps?
+                span.time-left 11:05
+    .row.comment-box-main.p-3.rounded-bottom
+        .col-md-9.col-sm-9.col-9.pr-0.comment-box
+            input.form-control(type='text' placeholder='comment ....')
+        .col-md-3.col-sm-2.col-2.pl-0.text-center.send-btn
+            button.btn.btn-info Send

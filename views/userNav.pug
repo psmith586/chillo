@@ -1,0 +1,24 @@
+script(type='text/javascript' src='./javascripts/switcher.js')
+
+.pos-f-t
+    nav.navbar.navbar-dark.bg-dark
+        button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarToggleExternalContent' aria-controls='navbarToggleExternalContent' aria-expanded='false' aria-label='Toggle navigation')
+            span.navbar-toggler-icon
+    #navbarToggleExternalContent.collapse
+        .bg-dark.p-4
+            ul.navbar-nav.nav-pills.p-0.mr-auto
+                li.nav-item.px-3
+                    h3.text-light John Doe
+                    .dropdown-divider
+                    a.nav-link.text-light.rounded-0.text-nowrap(type='button' onclick='switcher("profile")') Profile
+                    //a.nav-link.text-light.rounded-0.text-nowrap(href='#') Favorite Listings
+                    a.nav-link.text-light.rounded-0.text-nowrap(type='button' onclick='switcher("posted-listings")') Posted Listings
+                    a.nav-link.text-light.rounded-0.text-nowrap(type='button' onclick='switcher("messages")') Messages
+
+style.
+    .opac {
+        opacity: .95 !important;
+        border-radius: 6px;
+        min-width: 800px
+    }
+

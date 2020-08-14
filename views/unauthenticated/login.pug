@@ -1,0 +1,46 @@
+extends ../layout
+block content
+    link(rel='stylesheet' href='../stylesheets/loginStyle.css')
+    //script(type='text/javascript' src='./javascripts/validateForm.js')
+    .container.pb-5.bg-light.w-50.mt-5.opac.align-items-center(style='margin-top: 100px !important;')
+        .row.justify-content-center.mt-3
+            .col-10.align-content-center
+                form.needs-validation(action='/api/login' method='POST' novalidate='')
+                    .form-group
+                        h1.text-dark.font-italic Email:
+                        input#email.form-control(type='email' placeholder='Enter email' name='email' required='')
+                        .valid-feedback Valid.
+                        .invalid-feedback Please fill out this field.
+                    .form-group
+                        h1.text-dark.font-italic Password:
+                        input#pwd.form-control(type='password' placeholder='Enter password' name='password' required='')
+                        .valid-feedback Valid.
+                        .invalid-feedback Please fill out this field.
+                    .form-group.form-check
+                        label.form-check-label
+                            input.form-check-input(type='checkbox')
+                            |  Remember me
+                    button.btn.btn-primary(type='submit') Submit
+                form(action='/user/register' method='GET')
+                    .form-group.form-check
+                    button.btn.btn-primary(onclick='/user/register') New? Register Here
+    script.
+        (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    style.
+        .opac{opacity:.95 !important; border-radius:6px;min-width:800px}

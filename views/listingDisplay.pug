@@ -1,0 +1,103 @@
+link(rel='stylesheet' href='./stylesheets/listingStyle.css')
+script(type='text/javascript' src='./javascripts/listings.js')
+.row.p-0
+    - var listingsDisplayed = 0
+    each val in query
+        - var listing = val
+        - var foundAmenity = 1
+        each selectedAmenity in amenitiesArray
+            each listingAmenity in amenitiesQuery_Listings
+                if listingAmenity['listing_id'] == val['listing_id']
+                    if selectedAmenity == listingAmenity['name']
+                        - foundAmenity++
+        if foundAmenity == amenitiesArray.length || amenitiesArray.length == 0
+
+            include contactLister_Overlay.pug
+            include listingOverlay.pug
+
+            - listingsDisplayed++
+            script.
+                createMarkerArr(#{val['listing_id']},'#{val['street_addr']}, #{val['city']}, #{val['zipcode']}',#{val['latitude']},#{val['longitude']});
+            .col-6.my-listings.m-auto.p-auto
+                if val['sell_rent'] == '1'
+                    .card.border-3.border-success.shadow-lg.mb-3(onmouseleave="setCenterSFSU()" onmouseover="setCenter("+val['latitude']+","+val['longitude']+")" )
+                        each photo in photoList
+                            if val['listing_id'] == photo['listing_id'] && photo['main_photo'] == 1
+                                img.card-img-top.cardImg(src=photo['image_url'] alt='Main Photo 1' onclick="displayListing("+val['listing_id']+")")
+                                .card-body.text-dark.text-align-left.p-0
+                                    .card-title
+                                        .container
+                                            .row.px-3.justify-content-md-center.align-items-center(onclick="displayListing("+val['listing_id']+")")
+                                                .col-md-auto.p-0
+                                                    if val['category'] == 1
+                                                        a.text-success='⬤ Apartment For Sale'
+                                                    else if val['category'] == 2
+                                                        a.text-success='⬤ House For Sale'
+                                                    else if val['category'] == 3
+                                                        a.text-success='⬤ Condo For Sale'
+                                                    else if val['category'] == 4
+                                                        a.text-success='⬤ Studio For Sale'
+                                                    else 
+                                                        a.text-success='⬤ Property For Sale'
+                                            .row.px-3.justify-content-md-center.align-items-center(onclick="displayListing("+val['listing_id']+")")
+                                                .col-md-auto
+                                                    a.h4.text-nowrap='$'+Number(val['price']).toLocaleString()
+                                                .col-md-auto
+                                                    a.font-weight-bold=val['num_beds']
+                                                    a=' bd'
+                                                    a=' | '
+                                                    a.font-weight-bold=val['num_baths']
+                                                    a=' ba'
+                                                    a=' | '
+                                                    a.font-italic=val['square_ft'] + ' sq. ft.'
+                                            .row.px-3.justify-content-md-center.align-items-center(onclick="displayListing("+val['listing_id']+")")
+                                                .col-sm
+                                                    p.text-center=val['street_addr'] + ', ' + val['city']+' '+val['zipcode']
+                                            .row.px-3.align-items-center.mt-2
+                                                .col-md-auto.mr-auto.p-0(onclick="displayListing("+val['listing_id']+")")
+                                                    p
+                                                        img.mr-2(src='../resources/images/parking_icon.png' style='width:20px; height:20px;')
+                                                        span.h5=val['distance'] + " mi. from SFSU"
+                                                .col-md-auto.ml-auto.p-0
+                                                    .btn.btn-outline-success( onclick="contactListing("+val['listing_id']+",'"+val['street_addr']+"','"+val['city']+"','"+val['zipcode']+"')" ) Contact Seller
+                else
+                    .card.border-3.border-primary.shadow-lg.mb-3(onmouseleave="setCenterSFSU()" onmouseover="setCenter("+val['latitude']+","+val['longitude']+")")
+                        each photo in photoList
+                            if val['listing_id'] == photo['listing_id'] && photo['main_photo'] == 1
+                                img.card-img-top.cardImg(src=photo['image_url'] alt='Main Photo 1' onclick="displayListing("+val['listing_id']+")")
+                                .card-body.text-dark.text-align-left.p-0
+                                    .card-title
+                                        .container
+                                            .row.px-3.justify-content-md-center.align-items-center(onclick="displayListing("+val['listing_id']+")")
+                                                .col-md-auto.p-0
+                                                    if val['category'] == 1
+                                                        a.text-primary='⬤ Apartment For Rent'
+                                                    else if val['category'] == 2
+                                                        a.text-primary='⬤ House For Rent'
+                                                    else if val['category'] == 3
+                                                        a.text-primary='⬤ Condo For Rent'
+                                                    else if val['category'] == 4
+                                                        a.text-primary='⬤ Studio For Rent'
+                                                    else 
+                                                        a.text-primary='⬤ Property For Rent' 
+                                            .row.px-3.justify-content-md-center.align-items-center(onclick="displayListing("+val['listing_id']+")")
+                                                .col-md-auto
+                                                    a.h4.text-nowrap='$'+Number(val['price']).toLocaleString() + '/mo'
+                                                .col-md-auto
+                                                    a.font-weight-bold=val['num_beds']
+                                                    a=' bd'
+                                                    a=' | '
+                                                    a.font-weight-bold=val['num_baths']
+                                                    a=' ba'
+                                                    a=' | '
+                                                    a.font-italic=val['square_ft'] + ' sq. ft.'
+                                            .row.px-3.justify-content-md-center.align-items-center(onclick="displayListing("+val['listing_id']+")")
+                                                .col-sm
+                                                    p.text-center=val['street_addr'] + ', ' + val['city']+' '+val['zipcode']
+                                            .row.px-3.align-items-center.mt-2
+                                                .col-md-auto.mr-auto.p-0(onclick="displayListing("+val['listing_id']+")")
+                                                    p
+                                                        img.mr-2(src='../resources/images/parking_icon.png' style='width:20px; height:20px;')
+                                                        span.h5=val['distance'] + " mi. from SFSU"
+                                                .col-md-auto.ml-auto.p-0
+                                                    .btn.btn-outline-primary(onclick="contactListing("+val['listing_id']+",'"+val['street_addr']+"','"+val['city']+"','"+val['zipcode']+"')" ) Contact Seller

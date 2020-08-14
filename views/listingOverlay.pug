@@ -1,0 +1,89 @@
+.backgroundOverlay(id="backgroundOverlay"+val['listing_id'] onclick="displayListing("+val['listing_id']+")")
+.listingOverlay.shadow-lg(id="listingOverlay"+val['listing_id'])
+    .container-fluid.p-0.pt-3.m-0.h-100.overflow-auto
+        .row.p-0.m-0.h-100
+            .col.justify-content-center.p-0.m-0.border-right(style='min-width: 400px;')
+                include listingDisplay_photoDiv.pug
+            .col-md.d-flex.flex-row.p-0.m-0.mt-3(style='min-width: 400px;')
+                if val['sell_rent'] == '1'
+                    - var color = 'primary'
+                    - var sell_rent = 'Sale'
+                else
+                    - var color = 'primary'
+                    - var sell_rent = 'Rent'
+                .container.w-75
+                    .row.mb-3
+                        .col(style='text-align: center;')
+                            .btn(class='btn-outline-'+color style='font-size: 24px;' onclick="contactListing("+val['listing_id']+",'"+val['street_addr']+"','"+val['city']+"','"+val['zipcode']+"')" ) Contact Seller
+                    .row
+                        .col
+                            .card-body.text-dark.text-align-left.p-0.border.shadow-lg.overflow-auto
+                                    .card-title
+                                        .container
+                                            .row.px-3.align-items-center.mt-2
+                                                .col-md-auto.p-0
+                                                    if val['category'] == 1
+                                                        a(class='text-'+color)='⬤ Apartment For '+sell_rent
+                                                    else if val['category'] == 2
+                                                        a(class='text-'+color)='⬤ House For '+sell_rent
+                                                    else if val['category'] == 3
+                                                        a(class='text-'+color)='⬤ Condo For '+sell_rent
+                                                    else if val['category'] == 4
+                                                        a(class='text-'+color)='⬤ Studio For '+sell_rent
+                                                    else 
+                                                        a(class='text-'+color)='⬤ Property For '+sell_rent
+                                            .row.pr-3.align-items-center.mt-2
+                                                .col-md-auto
+                                                    a.h4.text-nowrap='$'+Number(val['price']).toLocaleString()
+                                                .col-md-auto
+                                                    a.font-weight-bold=val['num_beds']
+                                                    a=' bd'
+                                                    a=' | '
+                                                    a.font-weight-bold=val['num_baths']
+                                                    a=' ba'
+                                                    a=' | '
+                                                    a.font-italic=val['square_ft'] + ' sq. ft.'
+                                            .row.px-3.align-items-center.mt-2
+                                                .col-md-auto.p-0
+                                                    p.text-center=val['street_addr'] + ', ' + val['city']+' '+val['zipcode']
+                                            .row.px-3.align-items-center.mt-2
+                                                .col-md-auto.mr-auto.p-0
+                                                    p
+                                                        img.mr-2(src='../resources/images/parking_icon.png' style='width:20px; height:20px;')
+                                                        span.h5=val['distance'] + " mi. from SFSU"
+                                            .row.px-3.align-items-center.mt-2
+                                                .col.p-0.listingDisplay_AmenityLabel
+                                                    p
+                                                        img.p-0.m-0.mr-2(src='../resources/images/parking_icon.png' style='width:20px; height:20px;')
+                                                        span.h5 Parking Spots
+                                                .col.p-0
+                                                    .btn.listingDisplay_AmenityButton(class='btn-outline-'+color) #{val['parking']}
+                                            .row.px-3.align-items-center.mt-2
+                                                .col.p-0.listingDisplay_AmenityLabel
+                                                    p
+                                                        img.p-0.m-0.mr-2(src='../resources/images/pets_icon.png' style='width:20px; height:20px;')
+                                                        span.h5 Pets
+                                                .col.p-0
+                                                    .btn.listingDisplay_AmenityButton(class='btn-outline-'+color) #{val['pets']}
+                                            .row.px-3.align-items-center.mt-2
+                                                .col.p-0.listingDisplay_AmenityLabel
+                                                    span.h5 Description
+                                            .row.px-3.align-items-center.mt-2.border-top.border-bottom
+                                                .col.p-0
+                                                    p=val['description']
+                                            .row.px-3.align-items-center.mt-2
+                                                .col.p-0.listingDisplay_AmenityLabel
+                                                    span.h5 Location/Views
+                                            .row.px-3.align-items-center.mt-2
+                                                .col.p-0
+                                                    each amenity in amenitiesQuery_Listings
+                                                        if amenity['type'] == 1 && val['listing_id'] == amenity['listing_id']
+                                                            .btn.listingDisplay_AmenityButton.m-1(class='btn-outline-'+color) #{amenity['name']}
+                                            .row.px-3.align-items-center.mt-2
+                                                .col.p-0.listingDisplay_AmenityLabel
+                                                    span.h5 Amentities Included
+                                            .row.px-3.align-items-center.mt-2
+                                                .col.p-0
+                                                    each amenity in amenitiesQuery_Listings
+                                                        if amenity['type'] == 2 && val['listing_id'] == amenity['listing_id']
+                                                            .btn.listingDisplay_AmenityButton.m-1(class='btn-outline-'+color) #{amenity['name']}

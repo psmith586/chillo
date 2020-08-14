@@ -1,0 +1,10 @@
+.input-group.mb-3
+    .input-group-prepend(style='height: 40px;')
+        button.btn.btn-outline-secondary.dropdown-toggle.dropdown-toggle-split.overflow-auto(type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false') Rent/Sell
+            span.sr-only Toggle Dropdown
+        .dropdown-menu.overflow-auto
+            a.dropdown-item(href='#') Rent
+            a.dropdown-item(href='#') Sell
+    input.form-control(style='height: 40px;')(type='text' aria-label='Text input with segmented dropdown button' placeholder='Search by Address, City, or Zipcode')
+    .input-group-append(style='height: 40px;')
+        button.btn.btn-primary(type='button') Search

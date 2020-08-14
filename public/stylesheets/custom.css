@@ -1,0 +1,59 @@
+html {
+    height: 100%;
+
+}
+
+body{
+    background: url('../resources/images/cs_background.jpg') no-repeat center center ;
+    background-size: 100%;
+    background-size: cover;
+}
+.navBar{
+	z-index: -1;
+	width: 100vw;
+	position:fixed;
+	left: 0;
+}
+.nav-link{
+	border: none !important;
+}
+
+.nav-item:hover {
+	border-bottom: 1px solid lightblue;
+	cursor: pointer;
+}
+
+.backgroundOverlay_post {
+	position: fixed;
+	display: none;
+	height: 100vh;
+	width: 100vw;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 2;
+	background-color: rgba(0,0,0,0.35);
+}
+
+.postListingOverlay {
+	position: fixed;
+	display: none;
+	height: 100vh;
+	width: 75vw;
+	min-width: 400px;
+	top: 0;
+	padding-top: 100px;
+	bottom: 0;
+	left: 10vw;
+	right: 0;
+	z-index: 3;
+	background-color: white;
+	color: black;
+}
+
+.listingOverlay_ExitButton {
+	width: 40px;
+	height: 40px;
+	font-weight: bold;
+}

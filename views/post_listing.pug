@@ -1,0 +1,149 @@
+#backgroundOverlay_post.backgroundOverlay_post(onclick="showPostListing()")
+#postListingOverlay.postListingOverlay.pb-3
+    .container-fluid.pt-3.m-0.overflow-auto.h-100
+        .row.p-0.m-0
+            .col.w-100.d-flex.flex-row.p-0.m-0.justify-content-center.text-center
+                label.h1.ml-auto="Post A Listing"
+                input.listingOverlay_ExitButton.btn.btn-outline-danger.m-0.ml-auto(type='button' onclick='showPostListing()' value='X')
+        .row.p-0.m-0.overflow-auto
+            .col-md.border.p-auto
+                .container-fluid.pt-3.m-auto
+                    .row.p-0.m-0.text-left
+                        .col-sm
+                            label.h5='Listings Table'
+                    .row.p-0.m-1.text-left
+                        .col-sm
+                            label.h6="listing_id"
+                        .col-sm
+                            input(type='text' placeholder='Generated Automatically' disabled)
+                    .row.p-0.m-1.text-left
+                        .col-sm
+                            label.h6="lister_uid"
+                        .col-sm
+                            input(type='text' placeholder='Will be Automatic')
+                    .row.p-0.m-1.text-left
+                        .col-sm
+                            label.h6="street_addr"
+                        .col-sm
+                            input(type='text' placeholder='Street Address')
+                    .row.p-0.m-1.text-left
+                        .col-sm
+                            label.h6="city"
+                        .col-sm
+                            input(type='text' placeholder='City')
+                    .row.p-0.m-1.text-left
+                        .col-sm
+                            label.h6="zipcode"
+                        .col-sm
+                            input(type='text' placeholder='Zipcode')
+                    .row.p-0.m-1.text-left
+                        .col-sm
+                            label.h6="price"
+                        .col-sm
+                            input(type='text' placeholder='Price')
+                    .row.p-0.m-1.text-left
+                        .col-sm
+                            label.h6="num_beds"
+                        .col-sm
+                            input(type='text' placeholder='Number of Beds')
+                    .row.p-0.m-1.text-left
+                        .col-sm
+                            label.h6="num_baths"
+                        .col-sm
+                            input(type='text' placeholder='Number of Baths')
+                    .row.p-0.m-1.text-left
+                        .col-sm
+                            label.h6="square_ft"
+                        .col-sm
+                            input(type='text' placeholder='Square Feet')
+                    .row.p-0.m-1.text-left
+                        .col-sm
+                            label.h6="parking"
+                        .col-sm
+                            input(type='text' placeholder='Parking Spots')
+                    .row.p-0.m-1.text-left
+                        .col-sm
+                            label.h6="pets"
+                        .col-sm
+                            input(type='text' placeholder='Number of Pets Allowed')
+                    .row.p-0.m-1.text-left
+                        .col-sm
+                            label.h6="description"
+                        .col-sm
+                            input(type='text' placeholder='Description')
+                    .row.p-0.m-1.text-left
+                        .col-sm
+                            label.h6="approved"
+                        .col-sm
+                            input(type='text' placeholder='Default: 0' value='0' disabled)
+                    .row.p-0.m-1.text-left
+                        .col-sm
+                            label.h6="sell_rent"
+                        .col-sm
+                            input(type='text' placeholder='0: Rent, 1: Sell')
+                    .row.p-0.m-1.mt-3.text-left
+                        .col
+                            label.h6(style='font-size: 12px;')="1 - Apartment, 2 - House, 3 - Condo, 4 - Studio, 5 - Other"
+                    .row.p-0.m-1.mt-0.text-left
+                        .col-sm
+                            label.h6="category"
+                        .col-sm
+                            input(type='text' placeholder='Category Number')
+                    .row.p-0.m-1.text-left
+                        .col-sm
+                            label.h6="stories"
+                        .col-sm
+                            input(type='text' placeholder='Floor Stories')
+                    .row.p-0.m-1.text-left
+                        .col-sm
+                            label.h6="createdAt"
+                        .col-sm
+                            input(type='text' placeholder='Generated Automatically' disabled)
+                    .row.p-0.m-1.text-left
+                        .col-sm
+                            label.h6="updatedAt"
+                        .col-sm
+                            input(type='text' placeholder='Generated Automatically' disabled)
+                    .row.p-0.m-1.mt-3.text-left
+                        .col
+                            input.btn.btn-outline-primary(type='button' value='Submit Listing')
+            .col-md.border.p-auto
+                .container-fluid.pt-3.m-auto
+                    .row.p-0.m-0.text-left
+                        .col-sm
+                            label.h5='Photos Table'
+                    .row.p-0.m-1.text-left
+                        .col-sm
+                            label.h6="listing_id"
+                        .col-sm
+                            input(type='text' placeholder='Generated Automatically' disabled)
+                    .row.p-0.m-1.text-left
+                        .col-sm
+                            label.h6="uid"
+                        .col-sm
+                            input(type='text' placeholder='Generated Automatically' disabled)
+                    .row.p-0.m-1.text-left
+                        .col-sm
+                            label.h6="main_photo"
+                        .col-sm
+                            input.mr-2(type='checkbox' name='main_photo')
+                            label.h6(for='main_photo')='Main Listing Photo'
+                    .row.p-0.m-1.text-left
+                        .col-sm
+                            label.h6="photo_upload"
+                        .col-sm
+                            input.mr-2(type='file' name='upload_file')
+                    .row.p-0.m-1.mt-3.text-left
+                        .col
+                            input.btn.btn-outline-primary(type='button' value='Submit Photo' accept="image/*")
+
+    script.
+        function showPostListing(){
+            if(!document.getElementById('postListingOverlay').style.display || document.getElementById('postListingOverlay').style.display == "none"){
+                document.getElementById('backgroundOverlay_post').style.display = "block";
+                document.getElementById('postListingOverlay').style.display = "block";
+            } else {
+                document.getElementById('postListingOverlay').style.display = "none";
+                document.getElementById('backgroundOverlay_post').style.display = "none";
+            }
+        }

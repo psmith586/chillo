@@ -1,0 +1,502 @@
+extends layout
+block content
+	br
+	head
+		link(rel='stylesheet' href='./stylesheets/listingStyle.css')
+		script(type='text/javascript' src='./javascripts/listings.js')
+
+	.container-fluid.p-0.fixed-bottom.bg-light(style='z-index:0;')
+		.row.align-items-end
+			.col-12.bg-light
+				nav.navbar.navbar-expand-md.font-weight-bold.bg-light
+					form.form-inline(action='/search' method='POST' name='form' id='form' )
+						input(type='hidden' id='sortByValue' name='navSortBy' value=sortBySelected)
+						.p-1
+							input#filterSearchBox.form-control.mr-sm-2(type='search' placeholder='Search Address, City or Zipcode' name='searchBarListing' aria-label='Search' value=searchItem maxlength="40")
+							button#filterButton_Search.btn.text-primary.bg-light.btn-outline-primary.my-2.my-sm-0(type='submit' value='') Search
+						#navbarResponsive.collapse.navbar-collapse
+							ul.nav.nav-pills.justify-content-left
+									li.nav-item.p-1
+										.btn-group
+											button#moreFilterButton.btn.dropdown-toggle.p-0.px-2(type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='true' onclick='showMoreFilters(this)') More
+											ul.dropdown-menu.moreDropDown.p-0.overflow-auto
+												.form-check.mb-3
+													.container.p-0.m-0.flex-column.align-items-start
+														.row.p-0.m-0.mt-3
+															.col-12.text-nowrap.pl-3.m-0
+																.d-flex.flex-row
+																	img.mr-2(src='../resources/images/walking_icon.png' style='width:20px; height:20px;')
+																	.h5 Distance from San Francisco State University
+														.row.pl-3.m-0
+															.col-12
+																.d-flex.flex-row.justify-content-start
+																	.form-check.justify-content-start
+																		span.pr-1.h6.my-auto='Within '
+																		input#distanceTextInput.mx-1.text-center(type='text' maxlength='3' value=moreFilters_Distance onkeypress='return isNumber(this, event)' style='max-width: 40px;' name='moreFilters_Distance')
+																		span.pl-1.h6.my-auto=' Miles'
+																		.form-check.range-field.pl-3.rangeStyle
+																			input.border-0.p-0(type='range' min='0' max='200' oninput='updateDistanceTextInput(this.value)' value=moreFilters_Distance)
+														.row.p-0.m-0.mt-3
+															.col-12.text-nowrap.pl-3.m-0
+																.d-flex.flex-row
+																	img.mr-2(src='../resources/images/parking_icon.png' style='width:20px; height:20px;')
+																	.h5 Parking Spots
+														.row.pl-3.m-0
+															.col-12
+																.d-flex.flex-row.justify-content-start
+																	.form-check.justify-content-start
+																		input(type='hidden' id='moreFilters_Parking' name='moreFilters_Parking' value=moreFilters_Parking)
+																		.nav.nav-pills.justify-content-center
+																			if moreFilters_Parking == 0
+																				.li.nav-item.p-1
+																					.form-check.dropdown-item.p-0
+																						input.nav-link.filterButton.parking.active(type='button' onclick="setNumOfParking(this, 0)" value='Any')
+																			else
+																				.li.nav-item.p-1
+																					.form-check.dropdown-item.p-0
+																						input.nav-link.filterButton.parking(type='button' onclick="setNumOfParking(this, 0)" value='Any')
+																			- for (var i = 1; i <= 4; i++) {
+																				if moreFilters_Parking == i
+																					.li.nav-item.p-1
+																						.form-check.dropdown-item.p-0
+																							input.nav-link.filterButton.parking.active(type='button' onclick="setNumOfParking(this, "+i+")" value=i+"+")
+																				else
+																					.li.nav-item.p-1
+																						.form-check.dropdown-item.p-0
+																							input.nav-link.filterButton.parking(type='button' onclick="setNumOfParking(this, "+i+")" value=i+"+")
+																			- }
+														.row.p-0.m-0.mt-3
+															.col-12.text-nowrap.pl-3.m-0
+																.d-flex.flex-row
+																	img.mr-2(src='../resources/images/pets_icon.png' style='width:20px; height:20px;')
+																	.h5 Pets
+														.row.pl-3.m-0
+															.col-12
+																.d-flex.flex-row.justify-content-start
+																	.form-check.justify-content-start
+																		input(type='hidden' id='moreFilters_Pets' name='moreFilters_Pets' value=moreFilters_Pets)
+																		.nav.nav-pills.justify-content-center
+																			if moreFilters_Pets == -1
+																				.li.nav-item.p-1
+																					.form-check.dropdown-item.p-0
+																						input.nav-link.filterButton.pet.active(type='button' onclick="setNumOfPets(this, 'Any')" value='Any')
+																			else
+																				.li.nav-item.p-1
+																					.form-check.dropdown-item.p-0
+																						input.nav-link.filterButton.pet(type='button' onclick="setNumOfPets(this, 'Any')" value='Any')
+																			if moreFilters_Pets == 0
+																				.li.nav-item.p-1
+																					.form-check.dropdown-item.p-0
+																						input.nav-link.filterButton.pet.active(type='button' onclick="setNumOfPets(this, 'No')" value='No')
+																			else
+																				.li.nav-item.p-1
+																					.form-check.dropdown-item.p-0
+																						input.nav-link.filterButton.pet(type='button' onclick="setNumOfPets(this, 'No')" value='No')
+																			if moreFilters_Pets >= 1
+																				.li.nav-item.p-1
+																					.form-check.dropdown-item.p-0
+																						input.nav-link.filterButton.pet.active(type='button' onclick="setNumOfPets(this, 'Yes')" value='Yes')
+																				- for (var i = 1; i <= 3; i++) {
+																					if moreFilters_Pets == i
+																						.li.nav-item.p-1
+																							.form-check.dropdown-item.p-0
+																								input.nav-link.filterButton.pet_Numbers.active(type='button' onclick="setNumOfPets_Numbers(this, "+i+")" value=i)
+																					else
+																						.li.nav-item.p-1
+																							.form-check.dropdown-item.p-0
+																								input.nav-link.filterButton.pet_Numbers(type='button' onclick="setNumOfPets_Numbers(this, "+i+")" value=i)
+																				- }
+																			else
+																				.li.nav-item.p-1
+																					.form-check.dropdown-item.p-0
+																						input.nav-link.filterButton.pet(type='button' onclick="setNumOfPets(this, 'Yes')" value='Yes')
+																				- for (var i = 1; i <= 3; i++) {
+																					.li.nav-item.p-1
+																						.form-check.dropdown-item.p-0
+																							input.nav-link.filterButton.pet_Numbers.disabled(type='button' onclick="setNumOfPets_Numbers(this, "+i+")" value=i)
+																				- }												
+														.row.p-0.m-0.mt-3
+															.col-12.text-nowrap.pl-3.m-0
+																.d-flex.flex-row
+																	img.mr-2(src='../resources/images/squarefeet_icon.png' style='width:20px; height:20px;')
+																	.h5 Square Feet
+														.row.pl-3.m-0
+															.col-12
+																.d-flex.flex-row.justify-content-start
+																	.form-check.justify-content-start
+																		.d-flex.flex-row
+																			if moreFilters_SquareFeetMin == 0
+																				input(type='text' maxlength='5' placeholder='Any' name='moreFilters_SquareFeetMin' style='height: 30px;' onkeypress='return isNumber(this, event)')
+																			else 
+																				input(type='text' maxlength='6' placeholder='Any' name='moreFilters_SquareFeetMin' style='height: 30px;' onkeypress='return isNumber(this, event)' value=moreFilters_SquareFeetMin)
+																			span.mx-2.h4='-'
+																			if moreFilters_SquareFeetMax == 999999
+																				input(type='text' maxlength='5' placeholder='Any' name='moreFilters_SquareFeetMax' style='height: 30px;' onkeypress='return isNumber(this, event)')
+																			else 
+																				input(type='text' maxlength='6' placeholder='Any' name='moreFilters_SquareFeetMax' style='height: 30px;' onkeypress='return isNumber(this, event)' value=moreFilters_SquareFeetMax)
+														.row.p-0.m-0.mt-3
+															.col-12.text-nowrap.pl-3.m-0
+																.d-flex.flex-row
+																	img.mr-2(src='../resources/images/stories_icon.png' style='width:20px; height:20px;')
+																	.h5 Number of Stories
+														.row.pl-3.m-0
+															.col-12
+																.d-flex.flex-row.justify-content-start
+																	.form-check.justify-content-start
+																		input(type='hidden' id='moreFilters_Stories' name='moreFilters_Stories' value=moreFilters_Stories)
+																		.nav.nav-pills.justify-content-center
+																			if moreFilters_Stories == 0
+																				.li.nav-item.p-1
+																					.form-check.dropdown-item.p-0
+																						input.nav-link.filterButton.stories.active(type='button' onclick="setNumOfStories(this, 0)" value='Any')
+																			else
+																				.li.nav-item.p-1
+																					.form-check.dropdown-item.p-0
+																						input.nav-link.filterButton.stories(type='button' onclick="setNumOfStories(this, 0)" value='Any')
+																			if moreFilters_Stories == 1
+																				.li.nav-item.p-1
+																					.form-check.dropdown-item.p-0
+																						input.nav-link.filterButton.stories.active(type='button' onclick="setNumOfStories(this, 1)" value='Single')
+																			else
+																				.li.nav-item.p-1
+																					.form-check.dropdown-item.p-0
+																						input.nav-link.filterButton.stories(type='button' onclick="setNumOfStories(this, 1)" value='Single')
+																			if moreFilters_Stories == 2 && moreFilters_Stories_Max == 2
+																				.li.nav-item.p-1
+																					.form-check.dropdown-item.p-0
+																						input.nav-link.filterButton.stories.active(type='button' onclick="setNumOfStories(this, 2)" value='Double')
+																			else
+																				.li.nav-item.p-1
+																					.form-check.dropdown-item.p-0
+																						input.nav-link.filterButton.stories(type='button' onclick="setNumOfStories(this, 2)" value='Double')
+																			if moreFilters_Stories == 2 && moreFilters_Stories_Max > 2
+																				.li.nav-item.p-1
+																					.form-check.dropdown-item.p-0
+																						input.nav-link.filterButton.stories.active(type='button' onclick="setNumOfStories(this, 3)" value='Multi')
+																			else
+																				.li.nav-item.p-1
+																					.form-check.dropdown-item.p-0
+																						input.nav-link.filterButton.stories(type='button' onclick="setNumOfStories(this, 3)" value='Multi')
+														.row.p-0.m-0.mt-3
+															.col-12.text-nowrap.pl-3.m-0
+																.d-flex.flex-row
+																	.h5 Location/Views
+														.row.pl-3.m-0
+															input(type='hidden' id="moreFilters_Amenities" name="moreFilters_Amenities" value=moreFilters_Amenities)
+															.col-12
+																.d-flex.flex-wrap.p-0.m-0
+																	each val in amenities_query
+																		.form-check.dropdown-item.justify-content-start.p-0.m-0
+																			if val['type'] == 1
+																				.li.nav-item.p-1
+																					.form-check.dropdown-item.p-0
+																						if amenitiesArray.includes(val['name'])
+																							input.nav-link.filterButton.amenities.active(type='button' onclick="setAmenity(this)" value=val['name'])
+																						else
+																							input.nav-link.filterButton.amenities(type='button' onclick="setAmenity(this)" value=val['name'])
+														.row.p-0.m-0.mt-3
+															.col-12.text-nowrap.pl-3.m-0
+																.d-flex.flex-row
+																	.h5 Amenities
+														.row.pl-3.m-0
+															.col-12
+																.d-flex.flex-wrap.p-0.m-auto
+																	each val in amenities_query
+																		.form-check.dropdown-item.justify-content-start.p-0.m-0
+																			if val['type'] == 2
+																				.li.nav-item.p-1
+																					.form-check.dropdown-item.p-0
+																						if amenitiesArray.includes(val['name'])
+																							input.nav-link.filterButton.amenities.active(type='button' onclick="setAmenity(this)" value=val['name'])
+																						else
+																							input.nav-link.filterButton.amenities(type='button' onclick="setAmenity(this)" value=val['name'])
+												li.d-flex.justify-content-between.labelColor.py-2
+													input#hiddenClick(type='button' style='display: none;')
+													button#filterButton_Search.btn.text-primary.bg-light.btn-outline-primary.mx-3(type='submit' value='') Search
+													button.btn.btn-primary.mx-3(type='button' onclick='resetFilters()') Reset Filters
+													//-
+														.row.p-0.m-0.mt-3
+															.col-12.text-nowrap.pl-3.m-0
+																.d-flex.flex-row
+																	.h5 Filter
+														.row.pl-3.m-0
+															.col-12
+																.d-flex.flex-row.justify-content-start
+																	.form-check.justify-content-start
+																		.h6 Filter Content	
+													//
+									li.nav-item.p-1(value='' id='typeOfHousingForm' name='typeOfHousingForm')
+										.btn-group
+											button.btn.dropdown-toggle.p-0.px-2(type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false' value='' id='typeOfHousingButton' name='typeOfHousingButton')
+												if sell == '1' && rent == 0
+													| Sale/Rent
+												else if sell == '1' && rent != 0
+													| For Sale
+												else
+													| For Rent
+											.dropdown-menu.py-0
+												.d-flex.flex-column
+													.form-check.dropdown-item.w-100.justify-content-start.pl-3
+														if rent == 0
+															input#rentCheckBox.px-1(type='checkbox' name='housingType' onchange='setSellRentFilter()' value='0' checked)
+															label.px-3.h6.text-primary(for='rentCheckBox') ⬤ For Rent
+														else
+															input#rentCheckBox.px-1(type='checkbox' name='housingType' onchange='setSellRentFilter()' value='0')
+															label.px-3.h6.text-primary(for='rentCheckBox') ⬤ For Rent
+													.form-check.dropdown-item.w-100.justify-content-start.pl-3
+														if sell == 1
+															input#saleCheckBox.px-1(type='checkbox' name='housingType' value='1' onchange='setSellRentFilter()' checked)
+															label.px-3.h6.text-success(for='saleCheckBox') ⬤ For Sale
+														else 
+															input#saleCheckBox.px-1(type='checkbox' name='housingType' onchange='setSellRentFilter()' value='1' )
+															label.px-3.h6.text-success(for='saleCheckBox') ⬤ For Sale
+									li.nav-item.p-1
+										.btn-group
+											button.btn.dropdown-toggle.p-0.px-2(type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+												a#filterBedBathLabel=numOfBeds + '+ bd / ' + numOfBaths + '+ ba'
+											.dropdown-menu.justify-content-center.shadow.pt-0
+												.form-check
+													input.nav-link(type='hidden' id='numOfBeds' name='numOfBeds' value=numOfBeds)
+													input.nav-link(type='hidden' id='numOfBaths' name='numOfBaths' value=numOfBaths)
+												.d-flex.justify-content-center.labelColor.py-0
+													p.h5.my-2="Beds"
+												.d-flex.flex-column.bd-highlight.my-3
+													.nav.nav-pills.justify-content-center
+														- for (var i = 1; i <= 5; i++) {
+															if numOfBeds == i
+																.li.nav-item.p-1
+																.form-check.dropdown-item.p-0
+																	input.nav-link.filterButton.beds.active(type='button' onclick="setNumOfBeds(this, "+i+")" value=i+"+")
+															else
+																.li.nav-item.p-1
+																.form-check.dropdown-item.p-0
+																	input.nav-link.filterButton.beds(type='button' onclick="setNumOfBeds(this, "+i+")" value=i+"+")
+														- }
+														.li.nav-item.p-1.ml-1
+															.form-check.dropdown-item.p-0
+																input.nav-link.filterButton.beds(type='button' onclick='setNumOfBeds(this, 1)' value='Any')
+												.d-flex.justify-content-center.labelColor.py-0
+													p.h5.my-2="Baths"
+												.d-flex.flex-column.bd-highlight.my-3
+													.nav.nav-pills.justify-content-center
+														- for (var i = 1; i <= 5; i++) {
+															if numOfBaths == i
+																.li.nav-item.p-1
+																.form-check.dropdown-item.p-0
+																	input.nav-link.filterButton.baths.active(type='button' onclick="setNumOfBaths(this, "+i+")" value=i+"+")
+															else
+																.li.nav-item.p-1
+																.form-check.dropdown-item.p-0
+																	input.nav-link.filterButton.baths(type='button' onclick="setNumOfBaths(this, "+i+")" value=i+"+")
+														- }
+														.li.nav-item.p-1.ml-1
+															.form-check.dropdown-item.p-0
+																input.nav-link.filterButton.baths(type='button' onclick='setNumOfBaths(this, 1)' value='Any')
+									li.nav-item.p-1
+										.btn-group
+											button#priceFilterButton_Min.btn.dropdown-toggle.p-0.px-2(type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+												if filterPriceRange_Min == 0
+													a#priceFilterButtonLabel='Min Price: Any'
+												else
+													a#priceFilterButtonLabel='Min Price: $' + Number(filterPriceRange_Min).toLocaleString()
+											.dropdown-menu.p-0.m-0.bg-light.overflow-auto
+												.form-check
+													input(type='hidden' id='priceSelectedValue_Min' name='filterPriceRange_Min' value=filterPriceRange_Min)
+												.d-flex.flex-row.justify-content-center
+													.form-check.range-field.py-3
+														span.pr-1.h6.m-auto='Min Price: $'
+														if filterPriceRange_Min == 0
+															input#priceSelected_Min.priceSelected.text-center(type='text' maxlength='10' value='Any' onkeypress='return isNumber(this, event)' oninput='updateSliderText(0, this.value)')
+														else
+															input#priceSelected_Min.priceSelected.text-center(type='text' maxlength='10' value=Number(filterPriceRange_Min).toLocaleString() onkeypress='return isNumber(this, event)' oninput='updateSliderText(0, this.value)')
+												.d-flex.justify-content-center.px-0.m-2.mb-3
+													.form-check.range-field.px-0.rangeStyle
+														input#priceSlider_Min.border-0.p-0(type='range' min='0' max='100000' oninput='updateSlider(0, this.value)' value=filterPriceRange_Min)
+												.dropdown-divider
+												.px-0.m-2.mb-3
+													.form-check.px-0.d-flex.flex-column.align-items-start
+														input.nav-link.p-0.m-0.h6.filterPrices(type='button' value='Any' onclick="updateSliders(0, 'Any')")
+														- for (var i = 500; i <= 5000; i+=500){
+															input.nav-link.p-0.m-0.h6.filterPrices(type='button' value="$"+i.toLocaleString()+"+" onclick="updateSliders(0, "+i+")")
+														- }
+														- for (var i = 10000; i <= 100000; i+=10000){
+															input.nav-link.p-0.m-0.h6.filterPrices(type='button' value="$"+i.toLocaleString()+"+" onclick="updateSliders(0, "+i+")")
+														- }
+														- for (var i = 200000; i <= 1000000; i+=100000){
+															input.nav-link.p-0.m-0.h6.filterPrices(type='button' value="$"+i.toLocaleString()+"+" onclick="updateSliders(0, "+i+")")
+														- }
+									li.nav-item.p-1
+										.btn-group
+											button#priceFilterButton_Max.btn.dropdown-toggle.p-0.px-2(type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+												if filterPriceRange_Max == 10000000
+													a#priceFilterButtonLabel='Max Price: Any'
+												else
+													a#priceFilterButtonLabel='Max Price: $' + Number(filterPriceRange_Max).toLocaleString()
+											.dropdown-menu.p-0.m-0.bg-light.overflow-auto
+												.form-check
+													input(type='hidden' id='priceSelectedValue_Max' name='filterPriceRange_Max' value=filterPriceRange_Max)
+												.d-flex.flex-row.justify-content-center
+													.form-check.range-field.py-3
+														span.pr-1.h6.m-auto='Max Price: $'
+														if filterPriceRange_Max == 10000000
+															input#priceSelected_Max.priceSelected.text-center(type='text' maxlength='10' value='Any' onkeypress='return isNumber(this, event)' oninput='updateSliderText(1, this.value)')
+														else
+															input#priceSelected_Max.priceSelected.text-center(type='text' maxlength='10' value=Number(filterPriceRange_Max).toLocaleString() onkeypress='return isNumber(this, event)' oninput='updateSliderText(1, this.value)')
+												.d-flex.justify-content-center.px-0.m-2.mb-3
+													.form-check.range-field.px-0.rangeStyle
+														input#priceSlider_Max.border-0.p-0(type='range' min='1000' max='1000000' oninput='updateSlider(1, this.value)' value=filterPriceRange_Max)
+												.dropdown-divider
+												.px-0.m-2.mb-3
+													.form-check.px-0.d-flex.flex-column.align-items-start
+														input.nav-link.p-0.m-0.h6.filterPrices(type='button' value='Any' onclick="updateSliders(1, 'Any')")
+														- for (var i = 1000; i <= 5000; i+=500){
+															input.nav-link.p-0.m-0.h6.filterPrices(type='button' value="$"+i.toLocaleString() onclick="updateSliders(1, "+i+")")
+														- }
+														- for (var i = 10000; i <= 100000; i+=10000){
+															input.nav-link.p-0.m-0.h6.filterPrices(type='button' value="$"+i.toLocaleString() onclick="updateSliders(1, "+i+")")
+														- }
+														- for (var i = 200000; i <= 1000000; i+=100000){
+															input.nav-link.p-0.m-0.h6.filterPrices(type='button' value="$"+i.toLocaleString() onclick="updateSliders(1, "+i+")")
+														- }
+														- for (var i = 2000000; i <= 10000000; i+=1000000){
+															input.nav-link.p-0.m-0.h6.filterPrices(type='button' value="$"+i.toLocaleString() onclick="updateSliders(1, "+i+")")
+														- }
+									li.nav-item.p-1
+										.btn-group
+											button.btn.dropdown-toggle.p-0.px-2(type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false') Home Type
+											.dropdown-menu.m-auto
+												.d-flex.flex-column
+													.form-check.dropdown-item.w-100.justify-content-start.pl-3
+														if category_apartment == 1
+															input.px-1(type='checkbox' id='category_apartment' name='category_apartment' onchange='setHousingCategory()' value='1' checked)
+															label.px-1.h6(for='category_apartment') Apartment
+														else
+															input.px-1(type='checkbox' id='category_apartment' name='category_apartment' onchange='setHousingCategory()' value='1')
+															label.px-1.h6(for='category_apartment') Apartment
+													.form-check.dropdown-item.w-100.justify-content-start.pl-3
+														if category_house == 2
+															input.px-1(type='checkbox' id='category_house' name='category_house' value='2' onchange='setHousingCategory()' checked)
+															label.px-1.h6(for='category_house') House
+														else
+															input.px-1(type='checkbox' id='category_house' name='category_house' value='2' onchange='setHousingCategory()')
+															label.px-1.h6(for='category_house') House
+													.form-check.dropdown-item.w-100.justify-content-start.pl-3
+														if category_condo == 3
+															input.px-1(type='checkbox' id='category_condo' name='category_condo' onchange='setHousingCategory()' value='3' checked)
+															label.px-1.h6(for='category_condo') Condo
+														else
+															input.px-1(type='checkbox' id='category_condo' name='category_condo' onchange='setHousingCategory()' value='3')
+															label.px-1.h6(for='category_condo') Condo
+													.form-check.dropdown-item.w-100.justify-content-start.pl-3
+														if category_studio == 4
+															input.px-1(type='checkbox' id='category_studio' name='category_studio' value='4' onchange='setHousingCategory()' checked)
+															label.px-1.h6(for='category_studio') Studio
+														else 
+															input.px-1(type='checkbox' id='category_studio' name='category_studio' value='4' onchange='setHousingCategory()')
+															label.px-1.h6(for='category_studio') Studio
+													.form-check.dropdown-item.w-100.justify-content-start.pl-3
+														if category_other == 5
+															input.px-1(type='checkbox' id='category_other' name='category_other' value='5' onchange='setHousingCategory()' checked)
+															label.px-1.h6(for='category_other') Other
+														else 
+															input.px-1(type='checkbox' id='category_other' name='category_other' value='5' onchange='setHousingCategory()')
+															label.px-1.h6(for='category_other') Other		
+							button.btn.btn-primary.mx-3(type='button' onclick='resetFilters()') Reset Filters
+		.row.shadow-lg
+			.col.border.pr-3
+				.container-fluid.listingDiv.overflow-auto
+					.row.px-3.pt-3
+						.container-fluid
+							.row.justify-content-between.align-items-center.sticky-top.rowindex
+								.col.text-left
+									span#listingsFoundTotal.text-dark='Found ' + query.length + ' listing(s) using: '
+									span.font-weight-bold=searchItem
+								.col.text-right
+									.btn-group
+										button.btn.dropdown-toggle.p-0.px-2(type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+											if sortBySelected == 'price_high'
+												| Sort: High/Low
+											else if sortBySelected == 'price_low'
+												| Sort: Low/High
+											else if sortBySelected == 'distance'
+												| Sort: Shortest Distance
+											else
+												| Sort: Most Recent
+										.dropdown-menu.px-3
+											.d-flex.flex-column.bd-highlight.m-auto.align-items-start
+												.form-check.px-2.bd-highlight.dropdown-item
+													
+													if sortBySelected == 'createdAt'
+														input#priceHighRadioBox.px-1(type='radio' name='navSortBy' value='createdAt' onchange='sortBy(this.value)' checked)
+														label.px-1(for='priceHighRadioBox') Most Recent
+													else
+														input#priceHighRadioBox.px-1(type='radio' name='navSortBy' value='createdAt' onchange='sortBy(this.value)')
+														label.px-1(for='priceHighRadioBox') Most Recent
+												.form-check.px-2.bd-highlight.dropdown-item
+													if sortBySelected == 'distance'
+														input#priceHighRadioBox.px-1(type='radio' name='navSortBy' value='distance' onchange='sortBy(this.value)' checked)
+														label.px-1(for='priceHighRadioBox') Shortest Distance to SFSU
+													else
+														input#priceHighRadioBox.px-1(type='radio' name='navSortBy' value='distance' onchange='sortBy(this.value)')
+														label.px-1(for='priceHighRadioBox') Shortest Distance to SFSU
+												.form-check.px-2.bd-highlight.dropdown-item
+													if sortBySelected == 'price_high'
+														input#priceHighRadioBox.px-1(type='radio' name='navSortBy' value='price_high' onchange='sortBy(this.value)' checked)
+														label.px-1(for='priceHighRadioBox') Price High-Low
+													else 
+														input#priceHighRadioBox.px-1(type='radio' name='navSortBy' value='price_high' onchange='sortBy(this.value)')
+														label.px-1(for='priceHighRadioBox') Price High-Low
+												.form-check.px-2.bd-highlight.dropdown-item
+													if sortBySelected == 'price_low'
+														input#priceLowRadioBox.px-1(type='radio' name='navSortBy' value='price_low' onchange='sortBy(this.value)' checked)
+														label.px-1(for='priceLowRadioBox') Price Low-High
+													else
+														input#priceLowRadioBox.px-1(type='radio' name='navSortBy' value='price_low' onchange='sortBy(this.value)')
+														label.px-1(for='priceLowRadioBox') Price Low-High
+					include listingDisplay.pug
+			.col.p-0.my-map
+				#map
+				.btn.btn-primary(onclick='resetMapPosition()' style='position: absolute; top: 10px; left: 45%;') Reset Map
+				script.
+					var map;
+					var uluru = {lat: 37.724276, lng: -122.479955};
+					var bounds;
+					function initMap() {
+						
+						map = new google.maps.Map(document.getElementById('map'), {zoom: 12,center: uluru});
+						
+						bounds = new google.maps.LatLngBounds();
+						for(var i = 0; i < markerArr_lat.length; i++){
+							var coords = {lat: markerArr_lat[i], lng: markerArr_lng[i]};
+							var marker = new google.maps.Marker({position: coords, map: map});
+							marker.setTitle(markerArr_addr[i]);
+							bounds.extend(coords);
+						}
+						var sfsu_marker = new google.maps.Marker({position: uluru, map: map, title: "San Francisco State University"});
+						bounds.extend(sfsu_marker);
+						map.fitBounds(bounds);
+					}
+
+					function resetMapPosition(){
+						map.setZoom(12);
+						mapClicked = false;
+						map.panTo(uluru);
+					}
+
+					function setCenterSFSU(){
+						//if(!mapClicked) map.setCenter(uluru);
+					}
+
+					function setCenter(latitude, longitude){
+
+						var coords = {lat: latitude, lng: longitude};
+						map.panTo(coords);
+					}
+				
+
+				script(async='' defer='' src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAHQWyWSop0909_XPZ9JSi2YT3G0Mr6jxA&callback=initMap')
+	style.
+		body {
+			background-image: none !important;
+		}
+
