@@ -187,21 +187,21 @@ router.post('/search', (req, res) => {
     if(moreFilters_Stories == 3) moreFilters_Stories = 2;
 
 
-    sortBy = req.body.navSortBy;
+    let sortBy = req.body.navSortBy;
 
     sortBySelected = sortBy;
     if(sortBy=="price_high"){
         sortBy = "price";
-        sortByOrder = "DESC";
+        let sortByOrder = "DESC";
     } else if (sortBy=="price_low"){
         sortBy = "price";
-        sortByOrder = "ASC";
+        let sortByOrder = "ASC";
     } else if (sortBy=="distance"){
         sortBy = "distance";
-        sortByOrder = "ASC";
+        let sortByOrder = "ASC";
     } else {
         sortBy = "createdAt";
-        sortByOrder = "DESC";
+        let sortByOrder = "DESC";
     }
 
     //Change these values based on filter input
@@ -221,10 +221,10 @@ router.post('/search', (req, res) => {
         sell = 1;
         rent = 0;
     } else {
-        if(element !== undefined && element.includes('0')){
+        if(element != undefined && element.includes('0')){
             rent = 0;
         }
-        if(element !== undefined && element.includes('1')){
+        if(element != undefined && element.includes('1')){
             sell = 1;
         }
     }
@@ -243,7 +243,7 @@ router.post('/search', (req, res) => {
         category_other = 5;
     }
 
-    let searchItem = req.body.searchItem;
+    searchItem = req.body.searchItem;
     if(searchItem == null){
         searchItem = req.body.searchBar;
         if(searchItem == null){

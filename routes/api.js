@@ -19,7 +19,7 @@ const isAuthenticated = require('../config/passport/isAuthenticated');
 //helpers
 //check if email is from sfsu
 const verifySFSU = (email) => {
-  sfsuEmail = 'sfsu.edu';
+  let sfsuEmail = 'sfsu.edu';
   if(email.includes(sfsuEmail)){ return 1; }
   return 0;
 };
@@ -143,7 +143,7 @@ router.post('/uploadPhotos', (req, res) => {
 //edit listings
 router.post('/editListing', (req, res) => {
   
-  listingID = req.body.listing_id;
+  let listingID = req.body.listing_id;
 
   //all int fields => dbField: field ? field:0
   const price = req.body.price;
@@ -214,7 +214,7 @@ router.post('/register', (req, res) => {
 
 //delete message
 router.post('/deleteMessage', (req,res) => {
-  msg_id = req.body.msg_id
+  let msg_id = req.body.msg_id
   message.destroy({
     where: {
       msg_id: msg_id
@@ -240,7 +240,7 @@ router.get('/userMessages', (req, res) => {
 
 //delete listing
 router.post('/listing', (req,res) => {
-  listing_id = req.body.listing_id
+  let listing_id = req.body.listing_id
   listing.destory(
     {
       where:{

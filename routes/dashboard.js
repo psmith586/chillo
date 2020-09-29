@@ -45,29 +45,29 @@ router.get('/', isAuthenticated, (req, res) => {
 });
 
 function resetFilters(){
-    searchItem = '';
-    sell = 1;
-    rent = 0;
-    sortBySelected = "createdAt";
-    numOfBeds = 1;
-    numOfBaths = 1;
-    filterPriceRange_Min = 0;
-    filterPriceRange_Max = 10000000;
-    category_apartment = 1;
-    category_house = 2;
-    category_condo = 3;
-    category_studio = 4;
-    category_other = 5;
-    moreFilters_Parking = 0;
-    moreFilters_Distance = 200;
-    moreFilters_Pets = -1;
-    moreFilters_Pets_Max = 100;
-    moreFilters_SquareFeetMin = 0;
-    moreFilters_SquareFeetMax = 999999;
-    moreFilters_Stories = 0;
-    moreFilters_Stories_Max = 200;
-    moreFilters_Amenities = "";
-    amenities_arr = new Array();
+    let searchItem = '';
+    let sell = 1;
+    let rent = 0;
+    let sortBySelected = "createdAt";
+    let numOfBeds = 1;
+    let numOfBaths = 1;
+    let filterPriceRange_Min = 0;
+    let filterPriceRange_Max = 10000000;
+    let category_apartment = 1;
+    let category_house = 2;
+    let category_condo = 3;
+    let category_studio = 4;
+    let category_other = 5;
+    let moreFilters_Parking = 0;
+    let moreFilters_Distance = 200;
+    let moreFilters_Pets = -1;
+    let moreFilters_Pets_Max = 100;
+    let moreFilters_SquareFeetMin = 0;
+    let moreFilters_SquareFeetMax = 999999;
+    let moreFilters_Stories = 0;
+    let moreFilters_Stories_Max = 200;
+    let moreFilters_Amenities = "";
+    let amenities_arr = new Array();
 }
 
 module.exports = router;

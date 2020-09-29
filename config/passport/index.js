@@ -60,7 +60,7 @@ passport.use(new LocalStrategy(
     .catch(err => {
       if(err){ 
         console.log('Auth Error: ', err); 
-      };
+      }
 
       return done(null, false, { message: 'uh oh' }); 
     });

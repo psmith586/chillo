@@ -53,6 +53,18 @@ module.exports = {
       category: {
         type: Sequelize.INTEGER(11)
       },
+      stories: {
+        type: Sequelize.INTEGER(11)
+      },
+      distance: {
+        type: Sequelize.INTEGER(11)
+      },
+      latitude: {
+        type: Sequelize.FLOAT()
+      },
+      longitude: {
+        type: Sequelize.FLOAT()
+      },
       createdAt: Sequelize.DATE,
       updatedAt: Sequelize.DATE
     });

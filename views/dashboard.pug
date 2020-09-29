@@ -3,57 +3,17 @@ block content
     br
     head
         link(rel='stylesheet' href='./stylesheets/dashboardStyle.css')
-        script(type='text/javascript' src='./javascripts/switcher.js')
-//-    .container
+        script(type='text/javascript' src='./javascripts/getMessages.js')
+    .container
         .row
             .col-md-3.sidebar(style='top: 150px')
                 div
                     img.avatar-icon(src='https://i.stack.imgur.com/AIQ61.png')
                 .text-size
                     p
-                        b Joe Snuffy
-                div
-                    li.setting-details
-                        a.nav-item.nav-link(href='/music') My Music
-            .col-md-9(style='top: 100px')
-                h3.page-header
-                    b User Info
-                .content-block
-                    h2.content-title
-                        span.txt-alignment Profile
-                    .setting-list
-                        li.setting-details
-                            p.setting-label Name
-                            p.setting-text Joe Snuffy
-                        li.setting-details
-                            p.setting-label Date of Birth
-                            p.setting-text 12/31/2000
-                        li.setting-details
-                            p.setting-label Gender
-                            p.setting-text Male
-                        li.setting-details
-                            p.setting-label Country/Region of Residence
-                            p.setting-text United States
-                        li.setting-details
-                            p.setting-label Time Zone
-                            p.setting-text (UTC-7:00)America/Los Angeles
-                .content-block
-                    h2.content-title
-                        span.txt-alignment E-mail Address
-                    .setting-list
-                        li.setting-details
-                            p.setting-label E-mail Address
-                            p.setting-text Sierra.Bravo@gmail.com
--//    
-    .container.pb-5.bg-light.w-50.mt-5
-        if postMessage
-            h1 May Take 24 Hours to Approve
-        .row
-            .col-4
+                        b #{userFullName}
                 include userNav.pug
-            .col-8
-                body
-                a(href='/api/logout') LOGOUT
+            .col-md-9(style='top: 100px')
                 .container-fluid#switcher.bg-secondary(style='display:none')
                 .container-fluid#profile(style='display:block')
                     include profile.pug
@@ -63,3 +23,5 @@ block content
                     if query.length > 0
                         .container-fluid.listingDiv.overflow-auto
                             include listingDisplay.pug
+        .row
+            .col-4

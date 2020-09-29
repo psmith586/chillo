@@ -6,8 +6,8 @@ const multerS3 = require('multer-s3');
 const s3 = new aws.S3();
 
 aws.config.update({
-  secretAccessKey: 'dlCVfwirMf2WGdilUS/Px72vXkWE48yqeagg5bGU',
-  accessKeyId: 'AKIAIDR4RAXH2KGVGVDA',
+  secretAccessKey: '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',
+  accessKeyId: 'AKIAILAFD7OBYRYDAIVQ',
   region: 'us-west-1'
 });
 
@@ -23,7 +23,7 @@ const upload = multer({
   fileFilter: imageFilter,
   storage: multerS3({
     s3: s3,
-    bucket: 'chillo-photos',
+    bucket: 'chillopics',
     acl: 'public-read',
     contentType: multerS3.AUTO_CONTENT_TYPE,
     filename: function (req, file, cb) {
