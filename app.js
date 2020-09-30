@@ -9,11 +9,7 @@ const passport = require('passport');
 const session = require('express-session');
 const MemoryStore = require('memorystore')(session);
 
-
-//for use of environment variables in dev/test
-if(process.env.NODE_ENV === 'development'){
-  require('dotenv').config();
-}
+require('dotenv').config();
 
 //app build/dependencies
 const app = express();
