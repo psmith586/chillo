@@ -71,19 +71,5 @@
                                             .row.px-3.align-items-center.mt-2.border-top.border-bottom
                                                 .col.p-0
                                                     p=val['description']
-                                            .row.px-3.align-items-center.mt-2
-                                                .col.p-0.listingDisplay_AmenityLabel
-                                                    span.h5 Location/Views
-                                            .row.px-3.align-items-center.mt-2
-                                                .col.p-0
-                                                    each amenity in amenitiesQuery_Listings
-                                                        if amenity['type'] == 1 && val['listing_id'] == amenity['listing_id']
-                                                            .btn.listingDisplay_AmenityButton.m-1(class='btn-outline-'+color) #{amenity['name']}
-                                            .row.px-3.align-items-center.mt-2
-                                                .col.p-0.listingDisplay_AmenityLabel
-                                                    span.h5 Amentities Included
-                                            .row.px-3.align-items-center.mt-2
-                                                .col.p-0
-                                                    each amenity in amenitiesQuery_Listings
-                                                        if amenity['type'] == 2 && val['listing_id'] == amenity['listing_id']
-                                                            .btn.listingDisplay_AmenityButton.m-1(class='btn-outline-'+color) #{amenity['name']}
+                                            
+                                            

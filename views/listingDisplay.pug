@@ -4,14 +4,6 @@ script(type='text/javascript' src='./javascripts/listings.js')
     - var listingsDisplayed = 0
     each val in query
         - var listing = val
-        - var foundAmenity = 1
-        each selectedAmenity in amenitiesArray
-            each listingAmenity in amenitiesQuery_Listings
-                if listingAmenity['listing_id'] == val['listing_id']
-                    if selectedAmenity == listingAmenity['name']
-                        - foundAmenity++
-        if foundAmenity == amenitiesArray.length || amenitiesArray.length == 0
-
             include contactLister_Overlay.pug
             include listingOverlay.pug
 

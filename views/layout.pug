@@ -10,14 +10,11 @@ html
         title Learn More About the Chillows
     script(type='text/javascript' src='./../javascripts/findSearchBar.js')
 
-.container-fluid.p-0.sticky-top.overflow-hidden.m-0
+.container-fluid.p-0.fixed-top.m-0
     .row.p-0.m-0.bg-light
         .col.text-center.font-weight-bold.font-italic.p-0.m-0
-            p.text-dark.m-0.p-0 SFSU Software Engineering Project CSC 648-848, Summer 2020, For Demonstration Only
-    .row.p-0.m-0
-        .col.m-0
-            nav.navbar.navbar-expand-md.bg-light.border-bottom.border-light.shadow-lg.navBar
-                .container-fluid.align-items-end.p-0
+            p.p1.text-dark SFSU Software Engineering Project CSC 648-848, Summer 2020, For Demonstration Only
+            nav.navbar.navbar-expand-lg.fixed-top.pt-5.pb-1.bg-light.border-bottom.border-light.shadow-lg.navBar
                     a.navbar-brand.p-0(href='/')
                         img(src='../resources/images/chillow_logo.png' style='width:200px; height:40px;')
                     button.navbar-toggler.navbar-light.p-0(type='button' data-toggle='collapse' data-target='#navbarResponsive')
@@ -43,7 +40,7 @@ html
                                     a.nav-link.text-dark.rounded-0.text-nowrap(href='/api/logout') Logout
 
 
-body.bg-light.m-0.p-0
+body.bg-light.m-4.p-4
     #backgroundOverlay_post.backgroundOverlay_post(onclick="showPostListing()")
     #postListingOverlay.postListingOverlay
         .container-fluid.pt-3.m-0.h-100.pb-3.overflow-auto

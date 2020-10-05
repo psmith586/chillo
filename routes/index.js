@@ -80,7 +80,7 @@ router.get('/', function(req, res, next) {
 
     photo.findAll()
         .then(photos => photoQuery = photos)
-        .then(
+        /*.then(
             amenities.findAll({
                 order: [["name", "ASC"]]
             })
@@ -88,14 +88,14 @@ router.get('/', function(req, res, next) {
         )
         .then(listings_amenities.findAll()
             .then(listings_amenities => listings_amenitiesQuery = listings_amenities)
-        )
+        )*/
         .then(
             listing.findAll(
                 {order: [['createdAt', 'DESC']]}
             )
 
-                .then(listings => res.render('search', {amenitiesQuery_Listings: listings_amenitiesQuery,
-                    amenitiesArray: amenities_arr, moreFilters_Amenities, amenities_query: amenitiesQuery, query: listings,
+                .then(listings => res.render('search', {/*amenitiesQuery_Listings: listings_amenitiesQuery,
+                    amenitiesArray: amenities_arr, moreFilters_Amenities, amenities_query: amenitiesQuery,*/ query: listings,
                     moreFilters_Stories, moreFilters_Stories_Max, moreFilters_SquareFeetMin, moreFilters_SquareFeetMax,
                     moreFilters_Distance, moreFilters_Parking, moreFilters_Pets, category_apartment, category_house, category_condo,
                     category_studio, category_other, filterPriceRange_Min, filterPriceRange_Max, searchItem, sell, rent,
@@ -135,7 +135,7 @@ router.get('/listings', (req, res) => {
 
     photo.findAll()
         .then(photos => photoQuery = photos)
-        .then(
+        /*.then(
             amenities.findAll({
                 order: [["name", "ASC"]]
             })
@@ -143,14 +143,14 @@ router.get('/listings', (req, res) => {
             )
         .then(listings_amenities.findAll()
             .then(listings_amenities => listings_amenitiesQuery = listings_amenities)
-        )
+        )*/
         .then(
             listing.findAll(
                 {order: [['createdAt', 'DESC']]}
             )
 
-            .then(listings => res.render('listings', {amenitiesQuery_Listings: listings_amenitiesQuery,
-                amenitiesArray: amenities_arr, moreFilters_Amenities, amenities_query: amenitiesQuery, query: listings,
+            .then(listings => res.render('listings', {/*amenitiesQuery_Listings: listings_amenitiesQuery,
+                amenitiesArray: amenities_arr, moreFilters_Amenities, amenities_query: amenitiesQuery,*/ query: listings,
                 moreFilters_Stories, moreFilters_Stories_Max, moreFilters_SquareFeetMin, moreFilters_SquareFeetMax,
                 moreFilters_Distance, moreFilters_Parking, moreFilters_Pets, category_apartment, category_house, category_condo,
                 category_studio, category_other, filterPriceRange_Min, filterPriceRange_Max, searchItem, sell, rent,
@@ -161,11 +161,11 @@ router.get('/listings', (req, res) => {
 });
 
 router.post('/search', (req, res) => {
-    moreFilters_Amenities = "";
-    amenities_arr = new Array();
-    moreFilters_Amenities = (req.body.moreFilters_Amenities !== undefined) ? req.body.moreFilters_Amenities : "";
-    amenities_arr = moreFilters_Amenities.split('\,');
-    console.log('\tFilter moreFilters_Amenities: ' + moreFilters_Amenities);
+    //moreFilters_Amenities = "";
+    //amenities_arr = new Array();
+    //moreFilters_Amenities = (req.body.moreFilters_Amenities !== undefined) ? req.body.moreFilters_Amenities : "";
+    //amenities_arr = moreFilters_Amenities.split('\,');
+    //console.log('\tFilter moreFilters_Amenities: ' + moreFilters_Amenities);
 
     moreFilters_Pets_Max = 100;
     moreFilters_Stories_Max = 200;
@@ -254,7 +254,7 @@ router.post('/search', (req, res) => {
 
     photo.findAll()
         .then(photos => photoQuery = photos)
-        .then(
+        /*.then(
             amenities.findAll({
                 order: [["name", "ASC"]]
             })
@@ -262,7 +262,7 @@ router.post('/search', (req, res) => {
         )
         .then(listings_amenities.findAll()
             .then(listings_amenities => listings_amenitiesQuery = listings_amenities)
-        )
+        )*/
         .then(
             listing.findAll({
                 where: {
@@ -304,8 +304,8 @@ router.post('/search', (req, res) => {
                 order: [[sortBy, sortByOrder]]
             })
 
-            .then(listings => res.render('listings', {amenitiesQuery_Listings: listings_amenitiesQuery, amenitiesArray: amenities_arr, moreFilters_Amenities, 
-                amenities_query: amenitiesQuery, query: listings, moreFilters_Stories, moreFilters_Stories_Max, moreFilters_SquareFeetMin, moreFilters_SquareFeetMax,
+            .then(listings => res.render('listings', {/*amenitiesQuery_Listings: listings_amenitiesQuery, amenitiesArray: amenities_arr, moreFilters_Amenities, 
+                amenities_query: amenitiesQuery,*/ query: listings, moreFilters_Stories, moreFilters_Stories_Max, moreFilters_SquareFeetMin, moreFilters_SquareFeetMax,
                 moreFilters_Distance, moreFilters_Parking, moreFilters_Pets, category_apartment, category_house, category_condo, 
                 category_studio, category_other, filterPriceRange_Min, filterPriceRange_Max, searchItem, sell, rent, 
                 sortBySelected, photoList: photoQuery, numOfBeds, numOfBaths, loggedIn}))

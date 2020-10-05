@@ -1,6 +1,5 @@
 extends layout
 block content
-	br
 	head
 		link(rel='stylesheet' href='./stylesheets/listingStyle.css')
 		script(type='text/javascript' src='./javascripts/listings.js')
@@ -177,39 +176,6 @@ block content
 																				.li.nav-item.p-1
 																					.form-check.dropdown-item.p-0
 																						input.nav-link.filterButton.stories(type='button' onclick="setNumOfStories(this, 3)" value='Multi')
-														.row.p-0.m-0.mt-3
-															.col-12.text-nowrap.pl-3.m-0
-																.d-flex.flex-row
-																	.h5 Location/Views
-														.row.pl-3.m-0
-															input(type='hidden' id="moreFilters_Amenities" name="moreFilters_Amenities" value=moreFilters_Amenities)
-															.col-12
-																.d-flex.flex-wrap.p-0.m-0
-																	each val in amenities_query
-																		.form-check.dropdown-item.justify-content-start.p-0.m-0
-																			if val['type'] == 1
-																				.li.nav-item.p-1
-																					.form-check.dropdown-item.p-0
-																						if amenitiesArray.includes(val['name'])
-																							input.nav-link.filterButton.amenities.active(type='button' onclick="setAmenity(this)" value=val['name'])
-																						else
-																							input.nav-link.filterButton.amenities(type='button' onclick="setAmenity(this)" value=val['name'])
-														.row.p-0.m-0.mt-3
-															.col-12.text-nowrap.pl-3.m-0
-																.d-flex.flex-row
-																	.h5 Amenities
-														.row.pl-3.m-0
-															.col-12
-																.d-flex.flex-wrap.p-0.m-auto
-																	each val in amenities_query
-																		.form-check.dropdown-item.justify-content-start.p-0.m-0
-																			if val['type'] == 2
-																				.li.nav-item.p-1
-																					.form-check.dropdown-item.p-0
-																						if amenitiesArray.includes(val['name'])
-																							input.nav-link.filterButton.amenities.active(type='button' onclick="setAmenity(this)" value=val['name'])
-																						else
-																							input.nav-link.filterButton.amenities(type='button' onclick="setAmenity(this)" value=val['name'])
 												li.d-flex.justify-content-between.labelColor.py-2
 													input#hiddenClick(type='button' style='display: none;')
 													button#filterButton_Search.btn.text-primary.bg-light.btn-outline-primary.mx-3(type='submit' value='') Search
